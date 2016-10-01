@@ -19,16 +19,29 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe EntriesController, type: :controller do
+  let(:entry_owner) {
+    User.create!({
+      name: "Hugo",
+      email: "bla@test.com",
+    })
+  }
+
 
   # This should return the minimal set of attributes required to create a valid
   # Entry. As you add validations to Entry, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      value: 10,
+      user_id: entry_owner.id,
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      value: "",
+      user: nil,
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +116,16 @@ RSpec.describe EntriesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          value: 500,
+        }
       }
 
       it "updates the requested entry" do
         entry = Entry.create! valid_attributes
         put :update, params: {id: entry.to_param, entry: new_attributes}, session: valid_session
         entry.reload
-        skip("Add assertions for updated state")
+        expect(entry.value).to eq(new_attributes[:value])
       end
 
       it "assigns the requested entry as @entry" do
