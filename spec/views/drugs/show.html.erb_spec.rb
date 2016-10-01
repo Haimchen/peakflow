@@ -4,7 +4,7 @@ RSpec.describe "drugs/show", type: :view do
   before(:each) do
     @drug = assign(:drug, Drug.create!(
       :name => "Name",
-      :unit => "Unit",
+      :unit => "puff",
       :agent => "Agent",
       :description => "Description"
     ))

@@ -20,7 +20,7 @@ RSpec.describe "entries/index", type: :view do
   it "renders a list of entries" do
     render
     assert_select "tr>td", :text => 2.to_s, :count => 2
-    assert_select "tr>td", :text => nil.to_s, :count => 2
+    assert_select "tr>td", :text => "gunni".to_s, :count => 2
     assert_select "tr>td", :text => "Comment".to_s, :count => 2
   end
 end
